@@ -1,0 +1,62 @@
+﻿@model IEnumerable<NewCommerceClient.Models.ReceiptModel>
+
+@{
+    ViewBag.Title = "FinalBuy";
+    Layout = "~/Views/Shared/_Layout4.cshtml";
+}
+
+<h2 style="font-family:PacificRegular">Receipt </h2>
+
+<table style="font-family:PacificRegular">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FinalOrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SumQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SumPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShippingDate)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FinalOrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SumQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SumPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShippingDate)
+            </td>
+
+        </tr>
+    }
+
+</table>
+<br />
+<br />
+
+@Html.ActionLink("Back To List", "Checkout", "Checkout")

@@ -1,0 +1,827 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NewCommerce2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="int" />
+          <Property Name="PaidStatus" Type="nvarchar(max)" />
+          <Property Name="OrderId" Type="int" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="FinalOrder">
+          <Key>
+            <PropertyRef Name="FinalOrderID" />
+          </Key>
+          <Property Name="FinalOrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="OrderId" Type="int" />
+          <Property Name="SumQuantity" Type="int" />
+          <Property Name="SumPrice" Type="int" />
+          <Property Name="ShippingDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="MovieList">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Year" Type="nvarchar(max)" />
+          <Property Name="Rated" Type="nvarchar(max)" />
+          <Property Name="Released" Type="nvarchar(max)" />
+          <Property Name="Runtime" Type="nvarchar(max)" />
+          <Property Name="Genre" Type="nvarchar(max)" />
+          <Property Name="Director" Type="nvarchar(max)" />
+          <Property Name="Writer" Type="nvarchar(max)" />
+          <Property Name="Actors" Type="nvarchar(max)" />
+          <Property Name="Plot" Type="nvarchar(max)" />
+          <Property Name="Language" Type="nvarchar(max)" />
+          <Property Name="Country" Type="nvarchar(max)" />
+          <Property Name="Awards" Type="nvarchar(max)" />
+          <Property Name="Poster" Type="nvarchar(max)" />
+          <Property Name="Metascore" Type="nvarchar(max)" />
+          <Property Name="imdbRating" Type="nvarchar(max)" />
+          <Property Name="imdbVotes" Type="nvarchar(max)" />
+          <Property Name="Type" Type="nvarchar(max)" />
+          <Property Name="Response" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="SumQuantity" Type="int" />
+          <Property Name="SumPrice" Type="int" />
+          <Property Name="ApprovedStatus" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar(max)" />
+          <Property Name="ProductDescription" Type="nvarchar(max)" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="QuantityAvailable" Type="int" />
+          <Property Name="Price" Type="nvarchar(max)" />
+          <Property Name="ImagePath" Type="nvarchar(max)" />
+          <Property Name="ImagePath2" Type="nvarchar(max)" />
+          <Property Name="VideoPath" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK__Cart__ProductID__24927208">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart__UserId__25869641">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FinalOrde__Order__267ABA7A">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="FinalOrder" Type="Self.FinalOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="FinalOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FinalOrde__UserI__276EDEB3">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="FinalOrder" Type="Self.FinalOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="FinalOrder">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__UserId__286302EC">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Categor__29572725">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AddToCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProductName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Quantity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AddToCartDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="AddToUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="CheckOut" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DisplayAllProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DisplayCart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="DisplayProduct_ByCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Category" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="FinalBuy" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="orderID" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="LoginCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="OrderDisplay" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="username" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="SignUp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Address" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="NewCommerce2ModelStoreContainer">
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FinalOrder" EntityType="Self.FinalOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MovieList" EntityType="Self.MovieList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Cart__ProductID__24927208" Association="Self.FK__Cart__ProductID__24927208">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart__UserId__25869641" Association="Self.FK__Cart__UserId__25869641">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Cart" EntitySet="Cart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FinalOrde__Order__267ABA7A" Association="Self.FK__FinalOrde__Order__267ABA7A">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="FinalOrder" EntitySet="FinalOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FinalOrde__UserI__276EDEB3" Association="Self.FK__FinalOrde__UserI__276EDEB3">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="FinalOrder" EntitySet="FinalOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__UserId__286302EC" Association="Self.FK__Orders__UserId__286302EC">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Categor__29572725" Association="Self.FK__Product__Categor__29572725">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NewCommerce2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="PaidStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderId" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__Cart__OrderId__2B3F6F97" FromRole="Cart" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Cart__ProductID__2A4B4B5E" FromRole="Cart" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Cart__UserId__2C3393D0" FromRole="Cart" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__1273C1CD" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="FinalOrder">
+          <Key>
+            <PropertyRef Name="FinalOrderID" />
+          </Key>
+          <Property Name="FinalOrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+          <Property Name="SumQuantity" Type="Int32" />
+          <Property Name="SumPrice" Type="Int32" />
+          <Property Name="ShippingDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__FinalOrde__Order__5EBF139D" FromRole="FinalOrder" ToRole="Orders" />
+          <NavigationProperty Name="User" Relationship="Self.FK__FinalOrde__UserI__5FB337D6" FromRole="FinalOrder" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="SumQuantity" Type="Int32" />
+          <Property Name="SumPrice" Type="Int32" />
+          <Property Name="ApprovedStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__OrderId__2B3F6F97" FromRole="Orders" ToRole="Cart" />
+          <NavigationProperty Name="FinalOrders" Relationship="Self.FK__FinalOrde__Order__5EBF139D" FromRole="Orders" ToRole="FinalOrder" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Order__UserId__1BFD2C07" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ProductDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="QuantityAvailable" Type="Int32" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__ProductID__2A4B4B5E" FromRole="Product" ToRole="Cart" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__1273C1CD" FromRole="Product" ToRole="Category" />
+          <Property Name="ImagePath2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Carts" Relationship="Self.FK__Cart__UserId__2C3393D0" FromRole="Users" ToRole="Cart" />
+          <NavigationProperty Name="FinalOrders" Relationship="Self.FK__FinalOrde__UserI__5FB337D6" FromRole="Users" ToRole="FinalOrder" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Order__UserId__1BFD2C07" FromRole="Users" ToRole="Orders" />
+        </EntityType>
+        <Association Name="FK__Cart__OrderId__2B3F6F97">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart__ProductID__2A4B4B5E">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Cart__UserId__2C3393D0">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Cart">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Categor__1273C1CD">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FinalOrde__Order__5EBF139D">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="FinalOrder" Type="Self.FinalOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="FinalOrder">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FinalOrde__UserI__5FB337D6">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="FinalOrder" Type="Self.FinalOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="FinalOrder">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Order__UserId__1BFD2C07">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NewCommerceEntities" annotation:LazyLoadingEnabled="true" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <EntitySet Name="Carts" EntityType="Self.Cart" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="FinalOrders" EntityType="Self.FinalOrder" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Cart__OrderId__2B3F6F97" Association="Self.FK__Cart__OrderId__2B3F6F97">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart__ProductID__2A4B4B5E" Association="Self.FK__Cart__ProductID__2A4B4B5E">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Cart__UserId__2C3393D0" Association="Self.FK__Cart__UserId__2C3393D0">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Cart" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Categor__1273C1CD" Association="Self.FK__Product__Categor__1273C1CD">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FinalOrde__Order__5EBF139D" Association="Self.FK__FinalOrde__Order__5EBF139D">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="FinalOrder" EntitySet="FinalOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FinalOrde__UserI__5FB337D6" Association="Self.FK__FinalOrde__UserI__5FB337D6">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="FinalOrder" EntitySet="FinalOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Order__UserId__1BFD2C07" Association="Self.FK__Order__UserId__1BFD2C07">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <FunctionImport Name="AddToCart" ReturnType="Collection(NewCommerce2Model.AddToCart_Result)">
+            <Parameter Name="ProductName" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Quantity" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CheckOut" ReturnType="Collection(NewCommerce2Model.CheckOut_Result)">
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DisplayAllProducts" ReturnType="Collection(NewCommerce2Model.DisplayAllProducts_Result)" />
+          <FunctionImport Name="DisplayCart" ReturnType="Collection(NewCommerce2Model.DisplayCart_Result)">
+          <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DisplayProduct_ByCategory" ReturnType="Collection(NewCommerce2Model.DisplayProduct_ByCategory_Result)">
+          <Parameter Name="Category" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FinalBuy" ReturnType="Collection(NewCommerce2Model.FinalBuy_Result)">
+          <Parameter Name="orderID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="LoginCredentials" ReturnType="Collection(Int32)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="OrderDisplay" ReturnType="Collection(NewCommerce2Model.OrderDisplay_Result)">
+          <Parameter Name="username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SignUp">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddToCartDisplay" ReturnType="Collection(NewCommerce2Model.AddToCartDisplay_Result)">
+          <Parameter Name="UserName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AddToUsers" ReturnType="Collection(NewCommerce2Model.AddToUsers_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="MovieLists" EntityType="NewCommerce2Model.MovieList" />
+        </EntityContainer>
+        <ComplexType Name="AddToCart_Result">
+          <Property Type="Int32" Name="CartID" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Int32" Name="ProductID" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Price" Nullable="true" />
+          <Property Type="String" Name="PaidStatus" Nullable="true" />
+          <Property Type="Int32" Name="OrderId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="CheckOut_Result">
+          <Property Type="Int32" Name="OrderID" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Int32" Name="SumQuantity" Nullable="true" />
+          <Property Type="Int32" Name="SumPrice" Nullable="true" />
+          <Property Type="String" Name="ApprovedStatus" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="DisplayAllProducts_Result">
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="true" />
+          <Property Type="String" Name="ProductDescription" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="true" />
+          <Property Type="Int32" Name="QuantityAvailable" Nullable="true" />
+          <Property Type="String" Name="Price" Nullable="true" />
+          <Property Type="String" Name="ImagePath" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="DisplayCart_Result">
+          <Property Type="Int32" Name="CartID" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Int32" Name="ProductID" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Price" Nullable="true" />
+          <Property Type="String" Name="PaidStatus" Nullable="true" />
+          <Property Type="Int32" Name="OrderId" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="DisplayProduct_ByCategory_Result">
+          <Property Type="Int32" Name="ProductID" Nullable="false" />
+          <Property Type="String" Name="ProductName" Nullable="true" />
+          <Property Type="String" Name="ProductDescription" Nullable="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="true" />
+          <Property Type="Int32" Name="QuantityAvailable" Nullable="true" />
+          <Property Type="String" Name="Price" Nullable="true" />
+          <Property Type="String" Name="ImagePath" Nullable="true" />
+          <Property Type="String" Name="CategoryName" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="FinalBuy_Result">
+          <Property Type="Int32" Name="FinalOrderID" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Int32" Name="OrderId" Nullable="true" />
+          <Property Type="Int32" Name="SumQuantity" Nullable="true" />
+          <Property Type="Int32" Name="SumPrice" Nullable="true" />
+          <Property Type="DateTime" Name="ShippingDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="OrderDisplay_Result">
+          <Property Type="Int32" Name="OrderID" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Int32" Name="SumQuantity" Nullable="true" />
+          <Property Type="Int32" Name="SumPrice" Nullable="true" />
+          <Property Type="String" Name="ApprovedStatus" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AddToCartDisplay_Result">
+          <Property Type="Int32" Name="CartID" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="Int32" Name="ProductID" Nullable="true" />
+          <Property Type="Int32" Name="Quantity" Nullable="true" />
+          <Property Type="Int32" Name="Price" Nullable="true" />
+          <Property Type="String" Name="PaidStatus" Nullable="true" />
+          <Property Type="Int32" Name="OrderId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="AddToUsers_Result">
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" />
+          <Property Type="String" Name="Password" Nullable="true" />
+          <Property Type="String" Name="Address" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="MovieList">
+          <Key>
+            <PropertyRef Name="MovieID" />
+          </Key>
+          <Property Name="MovieID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Released" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Runtime" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Director" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Writer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Actors" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Plot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Awards" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Poster" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Metascore" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="imdbRating" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="imdbVotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Response" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NewCommerce2ModelStoreContainer" CdmEntityContainer="NewCommerceEntities">
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="NewCommerce2Model.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PaidStatus" ColumnName="PaidStatus" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="NewCommerce2Model.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FinalOrders">
+            <EntityTypeMapping TypeName="NewCommerce2Model.FinalOrder">
+              <MappingFragment StoreEntitySet="FinalOrder">
+                <ScalarProperty Name="FinalOrderID" ColumnName="FinalOrderID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="SumQuantity" ColumnName="SumQuantity" />
+                <ScalarProperty Name="SumPrice" ColumnName="SumPrice" />
+                <ScalarProperty Name="ShippingDate" ColumnName="ShippingDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="NewCommerce2Model.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SumQuantity" ColumnName="SumQuantity" />
+                <ScalarProperty Name="SumPrice" ColumnName="SumPrice" />
+                <ScalarProperty Name="ApprovedStatus" ColumnName="ApprovedStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="NewCommerce2Model.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="VideoPath" ColumnName="VideoPath" />
+                <ScalarProperty Name="ImagePath2" ColumnName="ImagePath2" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="QuantityAvailable" ColumnName="QuantityAvailable" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="NewCommerce2Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddToCart" FunctionName="NewCommerce2Model.Store.AddToCart">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewCommerce2Model.AddToCart_Result">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PaidStatus" ColumnName="PaidStatus" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="CheckOut" FunctionName="NewCommerce2Model.Store.CheckOut">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewCommerce2Model.CheckOut_Result">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SumQuantity" ColumnName="SumQuantity" />
+                <ScalarProperty Name="SumPrice" ColumnName="SumPrice" />
+                <ScalarProperty Name="ApprovedStatus" ColumnName="ApprovedStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DisplayAllProducts" FunctionName="NewCommerce2Model.Store.DisplayAllProducts">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewCommerce2Model.DisplayAllProducts_Result">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="QuantityAvailable" ColumnName="QuantityAvailable" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DisplayCart" FunctionName="NewCommerce2Model.Store.DisplayCart">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewCommerce2Model.DisplayCart_Result">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PaidStatus" ColumnName="PaidStatus" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DisplayProduct_ByCategory" FunctionName="NewCommerce2Model.Store.DisplayProduct_ByCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewCommerce2Model.DisplayProduct_ByCategory_Result">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="QuantityAvailable" ColumnName="QuantityAvailable" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FinalBuy" FunctionName="NewCommerce2Model.Store.FinalBuy">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewCommerce2Model.FinalBuy_Result">
+                <ScalarProperty Name="FinalOrderID" ColumnName="FinalOrderID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="SumQuantity" ColumnName="SumQuantity" />
+                <ScalarProperty Name="SumPrice" ColumnName="SumPrice" />
+                <ScalarProperty Name="ShippingDate" ColumnName="ShippingDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="LoginCredentials" FunctionName="NewCommerce2Model.Store.LoginCredentials" />
+          <FunctionImportMapping FunctionImportName="OrderDisplay" FunctionName="NewCommerce2Model.Store.OrderDisplay">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewCommerce2Model.OrderDisplay_Result">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="SumQuantity" ColumnName="SumQuantity" />
+                <ScalarProperty Name="SumPrice" ColumnName="SumPrice" />
+                <ScalarProperty Name="ApprovedStatus" ColumnName="ApprovedStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SignUp" FunctionName="NewCommerce2Model.Store.SignUp" />
+          <FunctionImportMapping FunctionImportName="AddToCartDisplay" FunctionName="NewCommerce2Model.Store.AddToCartDisplay">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewCommerce2Model.AddToCartDisplay_Result">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PaidStatus" ColumnName="PaidStatus" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="AddToUsers" FunctionName="NewCommerce2Model.Store.AddToUsers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="NewCommerce2Model.AddToUsers_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="MovieLists">
+            <EntityTypeMapping TypeName="NewCommerce2Model.MovieList">
+              <MappingFragment StoreEntitySet="MovieList">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Response" ColumnName="Response" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="imdbVotes" ColumnName="imdbVotes" />
+                <ScalarProperty Name="imdbRating" ColumnName="imdbRating" />
+                <ScalarProperty Name="Metascore" ColumnName="Metascore" />
+                <ScalarProperty Name="Poster" ColumnName="Poster" />
+                <ScalarProperty Name="Awards" ColumnName="Awards" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Plot" ColumnName="Plot" />
+                <ScalarProperty Name="Actors" ColumnName="Actors" />
+                <ScalarProperty Name="Writer" ColumnName="Writer" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Runtime" ColumnName="Runtime" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="Rated" ColumnName="Rated" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="MovieID" ColumnName="MovieID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

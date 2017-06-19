@@ -1,0 +1,43 @@
+﻿@model IEnumerable<NewCommerceClient.Models.ProductModel>
+
+    @{
+        ViewBag.Title = "DisplayProduct_ByCategory";
+        Layout = "~/Views/Shared/_Layout4.cshtml";
+    }
+
+
+<div style="padding-left: 50px;width:650px">
+    <table style="height: 300px; width: 650px; font-family: PacificoRegular">
+        @{var counter = 1; }
+        <tr style="padding-top: 20px">
+            @foreach (var item in Model)
+            {
+
+                <td style="height: 100px; width: 200px;">
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                    <a href="@Url.Action("MovieReview", "MoviePage", new { name = item.ProductName})">
+
+                        <img src="@Url.Content(item.ImagePath)" style="border-width: 8px; border-color: #fff #fff transparent transparent; background: #fff; -moz-border-radius: 5px 5px 5px 5px; border-radius: 5px 5px 5px 5px; display: block; height:150px; width:200px" />
+                    </a>
+                    <br />
+                    Price: Rs. @Html.DisplayFor(modelItem => item.Price)
+                    <br />
+                    Quantity: @Html.DisplayFor(modelItem => item.QuantityAvailable)
+                    <br />
+                    Category: @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td><br /><br /></td>
+                if (counter % 3 == 0)
+                {
+                    @:</tr><tr><td><br /></td></tr><tr>
+                }
+                counter++;
+
+
+            }
+        </tr>
+    </table>
+</div>
+
+
+

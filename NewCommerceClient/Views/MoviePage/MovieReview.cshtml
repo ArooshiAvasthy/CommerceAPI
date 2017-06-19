@@ -1,0 +1,155 @@
+﻿@model NewCommerceClient.Models.ImdEntity
+
+@{
+    ViewBag.Title = "MovieReview";
+    Layout = "~/Views/Shared/_Layout4.cshtml";
+}
+
+<link href="~/StyleSheet3.css" rel="stylesheet" />
+
+<h2>MovieReview</h2>
+
+
+    @using (Html.BeginForm("AddToCart", "Cart", Model, FormMethod.Post))
+    {
+        
+        @*<legend style="font-family:PacificRegular"><b>ImdbEntity</b></legend>*@
+        <div class="display-label">    
+        </div>
+        
+        <div class="display-field" >
+            @*<img src=@Html.DisplayFor(model => model.Poster) style="border-radius: 5px 5px 5px 5px;"/>*@
+            <img src="@Url.Content(Model.Poster)" style="border-radius: 5px 5px 5px 5px;" />
+        </div>
+       
+        <div class="display-label" style="font-family:PacificRegular">
+           <b style="font-family: PacificRegular"> @Html.DisplayNameFor(model => model.Title)</b>
+        </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Title)
+        </div>
+
+        <div class="display-label" style="font-family:PacificRegular">
+            <b> @Html.DisplayNameFor(model => model.Year)</b>
+        </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Year)
+        </div>
+
+        <div class="display-label" style="font-family:PacificRegular">
+           <b>  @Html.DisplayNameFor(model => model.Rated)</b>
+        </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Rated)
+        </div>
+
+        <div class="display-label" style="font-family:PacificRegular">
+           <b> @Html.DisplayNameFor(model => model.Released)</b>
+        </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Released)
+        </div>
+
+         <div class="display-label" style="font-family:PacificRegular">
+            <b>@Html.DisplayNameFor(model => model.Runtime)</b>
+         </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Runtime)
+        </div>
+
+        <div class="display-label" style="font-family:PacificRegular">
+            <b>@Html.DisplayNameFor(model => model.Genre)</b>
+        </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Genre)
+        </div>
+
+        <div class="display-label" style="font-family:PacificRegular">
+          <b>@Html.DisplayNameFor(model => model.Director)</b>
+        </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Director)
+        </div>
+
+         <div class="display-label" style="font-family:PacificRegular">
+            <b> @Html.DisplayNameFor(model => model.Writer)</b>
+         </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Writer)
+        </div>
+
+         <div class="display-label" style="font-family:PacificRegular">
+          <b> @Html.DisplayNameFor(model => model.Actors)</b>
+        </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Actors)
+        </div>
+
+        <div class="display-label" style="font-family:PacificRegular">
+           <b>@Html.DisplayNameFor(model => model.Plot)</b>
+        </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Plot)
+        </div>
+
+        <div class="display-label" style="font-family:PacificRegular">
+          <b> @Html.DisplayNameFor(model => model.Language)</b>
+        </div>
+       
+         <div class="display-field">
+            @Html.DisplayFor(model => model.Language)
+        </div>
+
+        <div class="display-label" style="font-family:PacificRegular">
+            <b> @Html.DisplayNameFor(model => model.Country)</b>
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Country)
+        </div>
+
+        <div class="display-label" style="font-family:PacificRegular">
+            <b>@Html.DisplayNameFor(model => model.Metascore)</b>
+        </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.Metascore)
+        </div>
+
+        <div class="display-label" style="font-family:PacificRegular">
+           <b> @Html.DisplayNameFor(model => model.imdbRating)</b>
+        </div>
+        
+        <div class="display-field">
+            @Html.DisplayFor(model => model.imdbRating)
+        </div>
+
+
+        <p>
+
+            @Html.ActionLink("Back", "AllMoviePage", "Home")
+
+            @if (@Session["Login"] == "Success")
+            {
+                <input name="CartButton" type="submit" value="Add To Cart" />
+
+                @Html.DropDownList("dropdown", TempData["dropdownQTy"] as List<SelectListItem>, "Quantity")
+                {
+                    TempData.Keep();
+                }
+               
+
+            }
+        </p>
+    }
+
+

@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Authorization";
+    Layout = "~/Views/Shared/_Layout4.cshtml";
+}
+<link href="~/HTML5%20Audio/freehtml5audio/css/style.css" rel="stylesheet" />
+<div id="welcome_slogan">
+    <h3><span>Loading....</span></h3>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+<script src="~/Scripts/modernizr-2.6.2.js"></script>
+<script>
+    function getCORS(url, success) {
+        var xhr = new XMLHttpRequest();
+        if (!('withCredentials' in xhr)) xhr = new XDomainRequest();
+        xhr.open('GET', url);
+        xhr.setRequestHeader('Authorization', 'Basic @Session["UserName"].ToString():@Session["Password"].ToString()');
+        xhr.onload = success;
+        xhr.send();
+        return xhr;
+
+    }
+
+
+    getCORS('http://localhost:51499/api/loginapi/GetUser', function (request) {
+    var response = request.currentTarget.response || request.target.responseText;
+  
+   var val1 = response.toString();
+    
+   if (val1.replace(/['"]+/g, '').localeCompare("true") == 0) {
+
+       //alert("Successful Login"); 
+       @*var username = '@Session["UserName"].ToString()';*@
+
+       @*'@Session["Login"] = "' +status + '" ;';
+        '@Session["Name"] = "' + username + '";';*@
+
+   $.ajax({
+       url: "/Login/SetSession",
+       type: "POST",
+       data: "{}",
+       contentType: 'application/json; charset=utf-8',
+       dataType: "json"
+       //success: function (data) {
+       //    alert('SetSession executed.');
+       //},
+       //error: function (jqXhr) {
+       //    alert(jqXhr.responseText);
+       //}
+             
+   });
+  
+
+            window.location.href = "/Home/Index";       
+    }
+
+    else {
+        //alert("Invalid Credentials");
+        window.location.href = "InvalidCredentials";
+    }
+
+
+ });
+
+
+</script>
+

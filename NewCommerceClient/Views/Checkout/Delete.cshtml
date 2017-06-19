@@ -1,0 +1,58 @@
+﻿@model NewCommerceClient.Models.CheckoutModel
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout4.cshtml";
+}
+
+<div style="font-family: PacificRegular; font-size: medium;font-style:normal ">
+    <h2 style="font-family:PacificRegular">Delete Order</h2>
+
+    <h3 style="font-family:PacificRegular">Are you sure you want to delete this?</h3>
+
+
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.OrderID) &nbsp;:
+        @Html.DisplayFor(model => model.OrderID)
+    </div>
+    <br />
+    @*<div class="display-field">
+        @Html.DisplayFor(model => model.OrderID)
+    </div>*@
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.UserId) &nbsp;:
+        @Html.DisplayFor(model => model.UserId)
+    </div>
+    <br />
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.SumQuantity) &nbsp;:
+        @Html.DisplayFor(model => model.SumQuantity)
+    </div>
+    <br />
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.SumPrice) &nbsp;:
+        @Html.DisplayFor(model => model.SumPrice)
+    </div>
+ 
+    <br /><br /><br />
+    @*<div class="display-label">
+             @Html.DisplayNameFor(model => model.ApprovedStatus)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.ApprovedStatus)
+        </div>*@
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <p>
+            <input type="submit" value="Delete" /> |
+            @Html.ActionLink("Back to List", "DisplayCheckout", "Checkout")
+        </p>
+    }
+
+</div>

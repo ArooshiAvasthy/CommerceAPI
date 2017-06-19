@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title><%= Html.Encode(ViewData["Title"]) %></title>
+
+    
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+
+    <link href="~/DesignTemplateCS/Content/Style.css" rel="stylesheet" />
+    <link href="~/StyleSheet1.css" rel="stylesheet" />
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+    <div id="page">
+        <div id="pageHeader">
+            <ul class="menu">
+                @*<li><a href="#">Sitemap</a></li>
+                <li><a href="#">Help</a></li>*@
+                <li><a href="@Url.Action("Login", "Login")">Sign In</a></li>
+                <li><a href="#">@HttpContext.Current.Session["SessionUserID"]</a></li>
+
+
+            </ul>
+
+
+            <div class="logo">
+
+            </div>
+            <div class="searchbox">
+
+                @if (@Session["UserName"] == null)
+                {
+                    <a href="@Url.Action("SignUp", "Login")">Login</a>
+                }
+                else if (Session["Login"]=="Success") 
+                ////else if (Session["Login"].ToString().Trim().Equals("Success", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    @Session["Name"];
+                    <a href="@Url.Action("Logout", "Login")">Sign Out</a>
+                }
+                else
+                {
+                    <a href="@Url.Action("SignUp", "Login")">Login</a>
+
+                }
+            
+            </div>
+        </div>
+        <div id="navigation">
+            <ul class="menu">
+                <li><a href="@Url.Action("Index", "Home")">Home</a></li>
+             
+                <li><a href="@Url.Action("Index", "Cart")">My Cart</a></li>
+            </ul>
+        </div>
+        <br /><br /><br /><br /><br />
+      
+        <div id="pageContent">
+            <div class="b">
+                <div class="left">
+                    <div class="submenu">
+                        <h2>Computer</h2>
+                        <ul class="f12">
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Comedy"})">Comedy</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Horror"})">Horror</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Action"})">Action</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Thriller"})">Thriller</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Suspence"})">Suspence</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="right">
+                    @*<asp:ContentPlaceHolder ID="MainContent" runat="server" />*@
+                    @RenderBody()
+                </div>
+            </div>
+        </div><div class="pageContentFooter"></div>
+        <div class="block margin_t_10">
+            <div class="h"></div>
+            <div class="f"></div>
+        </div>
+    </div>
+</body>
+</html>

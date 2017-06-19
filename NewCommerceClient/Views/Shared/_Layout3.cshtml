@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Movie World</title>
+    <meta name="description" content="website description" />
+    <meta name="keywords" content="website keywords, website keywords" />
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+    <link href="~/HTML5%20Audio/freehtml5audio/css/style.css" rel="stylesheet" />
+    <!-- modernizr enables HTML5 elements and feature detects -->
+    <script type="text/javascript"  src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+
+<body>
+    <div id="main">
+        <header>
+            <nav>
+                <div id="menubar">
+                    <ul id="nav">
+                        <li class="current"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li><a href="@Url.Action("AllMoviePage", "Home")">All Movies</a></li>
+                        <li><a href="@Url.Action("Index", "Cart")">My Cart</a></li>                      
+                    </ul>
+                </div><!--close menubar-->
+            </nav>
+            <div id="strapline">
+                <div id="welcome_slogan">
+                    <h3>Welcome To Movie <span>World....</span></h3>
+                </div><!--close welcome_slogan-->
+
+                <div class="searchbox">
+                    
+                    @if (@Session["UserName"] == null)
+                    {
+                        <a href="@Url.Action("SignUp", "Login")">Login</a>
+                    }
+                    else if (Session["Login"] == "Success")
+                    
+                    {
+                        <h4>Hi, @Session["Name"]</h4>
+                        <a href="@Url.Action("Logout", "Login")">Sign Out</a>
+
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("SignUp", "Login")">Login</a>
+
+                    }
+                </div>
+            </div><!--close strapline-->
+        </header>
+
+        <div id="site_content">
+
+            @*<div class="sidebar_container">
+                <div class="sidebar">
+                    <div class="sidebar_item">
+                        <h2>Category</h2>
+                        <ul class="f12">
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Comedy"})">Comedy</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Horror"})">Horror</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Action"})">Action</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Thriller"})">Thriller</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Suspence"})">Suspence</a></li>
+                        </ul>
+                    </div><!--close sidebar_item-->
+                </div><!--close sidebar-->
+                <div class="sidebar">
+                    <div class="sidebar_item">
+                        <h2>Upcoming Movies</h2>
+                        <h3>February 2013</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque cursus tempor enim.</p>
+                    </div><!--close sidebar_item-->
+                </div><!--close sidebar-->
+    
+            </div><!--close sidebar_container-->*@
+
+            <div class="slideshow">
+                <ul class="slideshow">
+                    <li class="show"><img width="888" height="450" src="~/HTML5%20Audio/freehtml5audio/images/home_1_1_830x450.jpg" alt="&quot;Enter your caption here&quot;" /></li>
+                    <li><img width="888" height="450" src="~/HTML5%20Audio/freehtml5audio/images/home_2_830x450.jpg" alt="&quot;Enter your caption here&quot;" /></li>
+                </ul>
+            </div>
+            <div id="content">
+                @*<div class="content_item">
+                    <h1>Welcome To Your Website</h1>
+                    <p>This standards compliant, simple, fixed width website template is released as an 'open source' design (under the Creative Commons Attribution 3.0 Licence), which means that you are free to download and use it for anything you want (including modifying and amending it). If you wish to remove the &ldquo;website template by Free HTML5 Templates&rdquo;, all I ask is for a donation of &pound;20.00 GBP. Please feel free to contact me with any questions you may have about my free HTML5 website templates or bespoke work.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi elit sapien, tempus sit amet hendrerit volutpat, euismod vitae risus. Etiam consequat, sem et vulputate dapibus, diam enim tristique est, vitae porta eros mauris ut orci. Praesent sed velit odio. Ut massa arcu, suscipit viverra molestie at, aliquet a metus. Nullam sit amet tellus dui, ut tincidunt justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec iaculis egestas laoreet. Nunc non ipsum metus, non laoreet urna. Vestibulum quis risus quis diam mattis tempus. Vestibulum suscipit pretium tempor. </p>
+                </div>*@<!--close content_item-->
+                @RenderBody()
+            </div><!--close content-->
+        </div><!--close site_content-->
+
+        <footer>
+        </footer>
+
+    </div><!--close main-->
+    <!-- javascript at the bottom for fast page loading -->
+    <script src="~/HTML5%20Audio/freehtml5audio/js/jquery.min.js"></script>
+    <script src="~/HTML5%20Audio/freehtml5audio/js/image_slide.js"></script>
+</body>
+</html>

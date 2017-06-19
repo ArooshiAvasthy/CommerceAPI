@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="141ad5407920438fbf5baadc8d8c5b75" Name="Diagram1">
+        <EntityTypeShape EntityType="NewCommerce2Model.Cart" Width="1.5" PointX="5.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCommerce2Model.Category" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCommerce2Model.FinalOrder" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCommerce2Model.Order" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCommerce2Model.Product" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="NewCommerce2Model.User" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
+        <AssociationConnector Association="NewCommerce2Model.FK__Cart__OrderId__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCommerce2Model.FK__Cart__ProductID__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCommerce2Model.FK__Cart__UserId__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCommerce2Model.FK__Product__Categor__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCommerce2Model.FK__FinalOrde__Order__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCommerce2Model.FK__FinalOrde__UserI__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="NewCommerce2Model.FK__Order__UserId__1BFD2C07" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="NewCommerce2Model.MovieList" Width="1.5" PointX="3.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

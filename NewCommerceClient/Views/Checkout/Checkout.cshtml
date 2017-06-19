@@ -1,0 +1,92 @@
+﻿@model IEnumerable<NewCommerceClient.Models.CheckoutModel>
+
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout4.cshtml";
+}
+
+<h2>Checkout</h2>
+
+<table style="font-family:PacificRegular">
+    <tr>
+        <th>
+            
+        </th>
+        <th>
+            <br /><br />
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            <br /><br />
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>*@
+        <th>
+            <br /><br />
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SumQuantity)
+        </th>
+        <th>
+            <br /><br />
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SumPrice)
+        </th>
+        <th>
+            <br /><br />
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.ApprovedStatus)
+        </th>*@
+        <th><br /><br /></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <img src="~/ImagesMovies/frontpage/images_70x70.png" />
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>*@
+            <td>
+                <br /><br />
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>*@
+            <td>
+                <br /><br />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SumQuantity)
+            </td>
+            <td>
+                <br /><br />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SumPrice)
+            </td>
+            <td>
+                <br /><br />
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ApprovedStatus)
+            </td>*@
+            <td>
+                <br /><br />
+            </td>
+            <td>
+                @Html.ActionLink("Final Buy", "FinalBuy", new { id = item.OrderID }) |
+
+                @Html.ActionLink("Delete", "Delete", new { id = item.OrderID }) 
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Movie World</title>
+    <meta name="description" content="website description" />
+    <meta name="keywords" content="website keywords, website keywords" />
+    <meta http-equiv="content-type" content="text/html; charset=windows-1252" />
+    <link href="~/HTML5%20Audio/freehtml5audio/css/style.css" rel="stylesheet" />
+    <!-- modernizr enables HTML5 elements and feature detects -->
+    <script type="text/javascript" src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body>
+    <div id="main">
+
+        <header>
+            <nav>
+                <div id="menubar">
+                    <ul id="nav">
+                        <li class="current"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                        <li><a href="@Url.Action("AllMoviePage", "Home")">All Movies</a></li>
+                        <li><a href="@Url.Action("Index", "Cart")">My Cart</a></li>
+                    </ul>
+                </div><!--close menubar-->
+            </nav>
+            <div id="strapline">
+                <div id="welcome_slogan">
+                    <h3>Welcome To Movie <span>World....</span></h3>
+                </div><!--close welcome_slogan-->
+
+                <div class="searchbox">
+
+                    @if (@Session["UserName"] == null)
+                    {
+                        <a href="@Url.Action("SignUp", "Login")">Login</a>
+                    }
+                    else if (Session["Login"] == "Success")
+                    
+                    {
+                         <h4>Hi, @Session["Name"]</h4>
+                         <a href="@Url.Action("Logout", "Login")">Sign Out</a>
+
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("SignUp", "Login")">Login</a>
+
+                    }
+                </div>
+            </div><!--close strapline-->
+        </header>
+
+        <div id="site_content">
+            <div class="sidebar_container">
+                <div class="sidebar">
+                    <div class="sidebar_item">
+                        <h2>Category</h2>
+                        <ul class="f12" style="font-family:PacificRegular" >
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Comedy"})">Comedy</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Horror"})">Horror</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Action"})">Action</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Thriller"})">Thriller</a></li>
+                            <li><a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Suspence"})">Suspence</a></li>
+                        </ul>
+                    </div><!--close sidebar_item-->
+                </div><!--close sidebar-->
+                <div class="sidebar">
+                    <div class="sidebar_item">
+                        <h2>Upcoming Movies</h2>
+                        <ul style="list-style-type: none;">
+                            <li><iframe width="150" height="150" src="https://www.youtube.com/embed/xXdnJ-EcGXY" style="border-radius:7px 7px 7px 7px"></iframe></li>
+                            <li><iframe width="150" height="150" src="https://www.youtube.com/embed/RFinNxS5KN4" style="border-radius:7px 7px 7px 7px"></iframe></li>
+                            <li><iframe width="150" height="150" src="https://www.youtube.com/embed/sCdV3esMr9M" style="border-radius:7px 7px 7px 7px"></iframe></li>
+                            
+                        </ul>
+                    </div><!--close sidebar_item-->
+                </div><!--close sidebar-->
+
+            </div><!--close sidebar_container-->
+
+         
+            <div id="content">
+                @RenderBody()
+            </div><!--close content-->
+        </div><!--close site_content-->
+
+        <footer></footer>
+
+    </div><!--close main-->
+    <!-- javascript at the bottom for fast page loading -->
+    <script src="~/HTML5%20Audio/freehtml5audio/js/jquery.min.js"></script>
+    <script src="~/HTML5%20Audio/freehtml5audio/js/image_slide.js"></script>
+</body>
+</html>

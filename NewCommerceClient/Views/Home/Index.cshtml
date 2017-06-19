@@ -1,0 +1,89 @@
+﻿@model IEnumerable<NewCommerceClient.Models.ProductModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<br /><br />
+<div id="welcome_slogan">
+    <h3><span>Relive  your  everyday  Movie  Experience....</span></h3>
+</div>
+<br /><br />
+<div style="padding-left: 150px;width:600px" class="zoomin">
+    <table style="height: 300px; width: 600px; font-family: PacificoRegular">
+
+        <tr style="padding-top: 150px">
+            <td style="height: 100px; width: 200px;">
+                <a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Comedy"})">
+                    <img src="@Url.Content("~/ImagesMovies/frontpage/comic(1).jpg")" style="border-radius: 50%" />
+                    
+                </a>
+                <br />
+                &nbsp;&nbsp;&nbsp; <h3 style="font-family: PacificoRegular">Comedy</h3>
+            </td>
+            <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+            <td style="height: 100px; width: 200px;">
+                <a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Horror"})">
+                    <img src="@Url.Content("~/ImagesMovies/frontpage/horror170x170.jpg")" style="border-radius: 50%" />
+                    
+                </a>
+                <br />
+                &nbsp;&nbsp;&nbsp; <h3 style="font-family: PacificoRegular">Horror</h3>
+            </td>
+            <td>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </td>
+
+            <td style="height: 100px; width: 200px;" class="zoomin">
+                <a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Action"})">
+                    <img src="@Url.Content("~/ImagesMovies/frontpage/Action170x170.jpg")" style="border-radius: 50%" />
+                    
+                </a>
+                <br />
+                &nbsp;&nbsp;&nbsp; <h3 style="font-family: PacificoRegular">Action</h3>
+            </td>
+
+        </tr>
+    </table>
+</div>
+
+<div style="padding-left: 230px;width:400px" class="zoomin">
+    <table style="height: 300px; width: 530px; font-family: Wyllam Regular">
+
+        <tr style="padding-top: 400px">
+
+            <td style="height: 100px; width: 100px;">
+                <a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Thriller"})">
+                    <img src="@Url.Content("~/ImagesMovies/jw_1_170x170.jpg")" style="border-radius: 50%" />
+                </a>
+                <br />
+                &nbsp;&nbsp;&nbsp;<h3 style="font-family: PacificoRegular">Thriller</h3>
+            </td>
+            @*<td>
+
+                </td>*@
+            <td style="height: 100px; width: 100px;">
+                <a href="@Url.Action("DisplayProduct_ByCategory", "Home",new {CategoryName ="Suspence"})">
+                    <img src="@Url.Content("~/ImagesMovies/frontpage/suspence_170x170.jpg")" style="border-radius: 50%" />
+                    
+                </a>
+                <br />
+                &nbsp;&nbsp;&nbsp; <h3 style="font-family: PacificoRegular">Suspence</h3>
+            </td>
+
+        </tr>
+
+    </table>
+</div>
+
+
+
+
+
+
+
+
+

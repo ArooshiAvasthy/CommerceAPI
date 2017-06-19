@@ -1,0 +1,81 @@
+﻿@model IEnumerable<NewCommerceClient.Models.CartModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout4.cshtml";
+}
+
+
+<table style="font-family:PacificRegular;padding-top:30px">
+    <tr>
+      
+        <th>
+           
+        </th>
+        <th>
+            <br />
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+           
+        </th>
+        <th>
+            <br />
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            <br />
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <td><br /><br/></td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+           
+            <td>
+                <img src="@Url.Content(item.ImagePath2)" style="border-radius: 50%" />
+               
+            </td>
+            <td>
+                <br />
+            </td>    
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+               
+            </td>
+            <td>
+                <br />
+            </td>
+            <td>
+             Rs.@Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <br />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td style="font-family:PacificRegular">
+                @*@Html.ActionLink("Pay And Download", "Download", new { videopath = item.VideoPath, title = item.ProductName, id = item.CartID }, new { onclick = "javascript:return false;" })*@
+                @Html.ActionLink("Pay And Download", "Download", new { videopath = item.VideoPath, title = item.ProductName, id = item.CartID })
+            </td>
+        </tr>
+        
+       <tr>
+          <td>
+              <br/>
+          </td>
+       </tr>
+    }
+
+</table>
+
+@Html.ActionLink("Proceed To Checkout", "Checkout", "Checkout")

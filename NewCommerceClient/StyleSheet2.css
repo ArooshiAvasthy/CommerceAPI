@@ -1,0 +1,9 @@
+﻿body {
+}
+#list1 { }
+#list1 ul { list-style: none; }
+#list1 ul li
+ {
+     display: inline;
+     padding-left: 100px;
+}
