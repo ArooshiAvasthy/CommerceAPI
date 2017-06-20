@@ -1,0 +1,638 @@
+USE [master]
+GO
+/****** Object:  Database [NewCommerce]    Script Date: 6/19/2017 11:24:15 AM ******/
+CREATE DATABASE [NewCommerce]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'NewCommerce', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\NewCommerce.mdf' , SIZE = 3072KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'NewCommerce_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\NewCommerce_log.ldf' , SIZE = 1024KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [NewCommerce] SET COMPATIBILITY_LEVEL = 120
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [NewCommerce].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [NewCommerce] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [NewCommerce] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [NewCommerce] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [NewCommerce] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [NewCommerce] SET ARITHABORT ON 
+GO
+ALTER DATABASE [NewCommerce] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [NewCommerce] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [NewCommerce] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [NewCommerce] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [NewCommerce] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [NewCommerce] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [NewCommerce] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [NewCommerce] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [NewCommerce] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [NewCommerce] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [NewCommerce] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [NewCommerce] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [NewCommerce] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [NewCommerce] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [NewCommerce] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [NewCommerce] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [NewCommerce] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [NewCommerce] SET RECOVERY FULL 
+GO
+ALTER DATABASE [NewCommerce] SET  MULTI_USER 
+GO
+ALTER DATABASE [NewCommerce] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [NewCommerce] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [NewCommerce] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [NewCommerce] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+ALTER DATABASE [NewCommerce] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'NewCommerce', N'ON'
+GO
+USE [NewCommerce]
+GO
+/****** Object:  Table [dbo].[Cart]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cart](
+	[CartID] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NULL,
+	[ProductID] [int] NULL,
+	[Quantity] [int] NULL,
+	[Price] [int] NULL,
+	[PaidStatus] [nvarchar](max) NULL,
+	[OrderId] [int] NULL,
+ CONSTRAINT [PK_Cart] PRIMARY KEY CLUSTERED 
+(
+	[CartID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Category]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Category](
+	[CategoryId] [int] IDENTITY(1,1) NOT NULL,
+	[CategoryName] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Category] PRIMARY KEY CLUSTERED 
+(
+	[CategoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[FinalOrder]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[FinalOrder](
+	[FinalOrderID] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NULL,
+	[OrderId] [int] NULL,
+	[SumQuantity] [int] NULL,
+	[SumPrice] [int] NULL,
+	[ShippingDate] [datetime] NULL,
+ CONSTRAINT [PK_FinalOrder] PRIMARY KEY CLUSTERED 
+(
+	[FinalOrderID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[MovieList]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MovieList](
+	[MovieID] [int] IDENTITY(1,1) NOT NULL,
+	[Year] [nvarchar](max) NULL,
+	[Rated] [nvarchar](max) NULL,
+	[Released] [nvarchar](max) NULL,
+	[Runtime] [nvarchar](max) NULL,
+	[Genre] [nvarchar](max) NULL,
+	[Director] [nvarchar](max) NULL,
+	[Writer] [nvarchar](max) NULL,
+	[Actors] [nvarchar](max) NULL,
+	[Plot] [nvarchar](max) NULL,
+	[Language] [nvarchar](max) NULL,
+	[Country] [nvarchar](max) NULL,
+	[Awards] [nvarchar](max) NULL,
+	[Poster] [nvarchar](max) NULL,
+	[Metascore] [nvarchar](max) NULL,
+	[imdbRating] [nvarchar](max) NULL,
+	[imdbVotes] [nvarchar](max) NULL,
+	[Type] [nvarchar](max) NULL,
+	[Response] [nvarchar](max) NULL,
+	[Title] [nvarchar](max) NULL,
+ CONSTRAINT [PK_MovieList] PRIMARY KEY CLUSTERED 
+(
+	[MovieID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Orders]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Orders](
+	[OrderID] [int] IDENTITY(1,1) NOT NULL,
+	[UserId] [int] NULL,
+	[SumQuantity] [int] NULL,
+	[SumPrice] [int] NULL,
+	[ApprovedStatus] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Product]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Product](
+	[ProductID] [int] IDENTITY(1,1) NOT NULL,
+	[ProductName] [nvarchar](max) NULL,
+	[ProductDescription] [nvarchar](max) NULL,
+	[CategoryID] [int] NULL,
+	[QuantityAvailable] [int] NULL,
+	[Price] [nvarchar](max) NULL,
+	[ImagePath] [nvarchar](max) NULL,
+	[ImagePath2] [nvarchar](max) NULL,
+	[VideoPath] [nvarchar](max) NULL,
+ CONSTRAINT [PK_Product] PRIMARY KEY CLUSTERED 
+(
+	[ProductID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[UserID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [nvarchar](max) NULL,
+	[Email] [nvarchar](max) NULL,
+	[Password] [nvarchar](max) NULL,
+	[Address] [nvarchar](max) NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[UserID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+SET IDENTITY_INSERT [dbo].[Category] ON 
+
+GO
+INSERT [dbo].[Category] ([CategoryId], [CategoryName]) VALUES (1, N'Comedy')
+GO
+INSERT [dbo].[Category] ([CategoryId], [CategoryName]) VALUES (2, N'Horror')
+GO
+INSERT [dbo].[Category] ([CategoryId], [CategoryName]) VALUES (3, N'Action')
+GO
+INSERT [dbo].[Category] ([CategoryId], [CategoryName]) VALUES (4, N'Thriller')
+GO
+INSERT [dbo].[Category] ([CategoryId], [CategoryName]) VALUES (5, N'Suspence')
+GO
+SET IDENTITY_INSERT [dbo].[Category] OFF
+GO
+SET IDENTITY_INSERT [dbo].[MovieList] ON 
+
+GO
+INSERT [dbo].[MovieList] ([MovieID], [Year], [Rated], [Released], [Runtime], [Genre], [Director], [Writer], [Actors], [Plot], [Language], [Country], [Awards], [Poster], [Metascore], [imdbRating], [imdbVotes], [Type], [Response], [Title]) VALUES (1, N'2015', N'7', N' 11 June 2015 (UK)', N' 2h 4min ', N' Action, Adventure, Sci-Fi ', N'Colin Trevorrow', N'Rick Jaffa,Amanda Silver,Colin Trevorrow,Derek Connolly,Rick Jaffa,Amanda Silver', N' Chris Pratt, Bryce Dallas Howard, Ty Simpkins', N'A new theme park, built on the original site of Jurassic Park, creates a genetically modified hybrid dinosaur, which escapes containment and goes on a killing spree.', N'English', N'USA', NULL, N'~/ImagesMovies/jw_4_200x250.jpg', N'59', N'3.5', NULL, N' Action, Adventure, Sci-Fi ', NULL, N'Jurassic World ')
+GO
+INSERT [dbo].[MovieList] ([MovieID], [Year], [Rated], [Released], [Runtime], [Genre], [Director], [Writer], [Actors], [Plot], [Language], [Country], [Awards], [Poster], [Metascore], [imdbRating], [imdbVotes], [Type], [Response], [Title]) VALUES (2, N'2015', N'7.2', N'23 October 2015 (USA) ', N'2h 2min', N'Biography, Drama', N'Danny Boyle', N'Aaron Sorkin (screenplay), Walter Isaacson (book) ', N'Michael Fassbender, Kate Winslet, Seth Rogen', N'Steve Jobs takes us behind the scenes of the digital revolution, to paint a portrait of the man at its epicenter. The story unfolds backstage at three iconic product launches, ending in 1998 with the unveiling of the iMac.', N'English', N'USA', NULL, N'~/ImagesMovies/jobs_1_200x200_200x250.jpg', N'82', N'7.2', NULL, N'Biography, Drama', NULL, N'Steve Jobs')
+GO
+INSERT [dbo].[MovieList] ([MovieID], [Year], [Rated], [Released], [Runtime], [Genre], [Director], [Writer], [Actors], [Plot], [Language], [Country], [Awards], [Poster], [Metascore], [imdbRating], [imdbVotes], [Type], [Response], [Title]) VALUES (3, N'2015', N'7.4', N'1 May 2015 (USA)', N'2h 21min', N'Action, Adventure, Sci-Fi', N'Joss Whedon ', N'Joss Whedon, Stan Lee', N'Robert Downey Jr., Chris Evans, Mark Ruffalo', N'When Tony Stark and Bruce Banner try to jump-start a dormant peacekeeping program called Ultron, things go horribly wrong and it''s up to Earth''s mightiest heroes to stop the villainous Ultron from enacting his terrible plan.', N'English', N'USA', NULL, N'~/ImagesMovies/Avengers_1_200x200_200x250.jpg', N'66', N'7.4', NULL, N'Action, Adventure, Sci-Fi', NULL, N'Avengers')
+GO
+INSERT [dbo].[MovieList] ([MovieID], [Year], [Rated], [Released], [Runtime], [Genre], [Director], [Writer], [Actors], [Plot], [Language], [Country], [Awards], [Poster], [Metascore], [imdbRating], [imdbVotes], [Type], [Response], [Title]) VALUES (4, N'2011', N'7.5', N'16 December 2011 (USA) ', N'2h 9min', N'Action, Adventure, Crime', N'Guy Ritchie', N'Michele Mulroney, Kieran Mulroney', N'Robert Downey Jr., Jude Law, Jared Harris', N'Sherlock Holmes and his longtime trusted associate, Doctor Watson, take on their arch-nemesis, Professor Moriarty, with the help of Holmes'' older brother Mycroft Holmes and a gypsy named Simza.', N'English', N'USA', NULL, N'~/ImagesMovies/Sherlock_1_200x200_200x250.jpg', N'48', N'7.5', NULL, N'Action, Adventure, Crime', NULL, N'SherLock Holmes')
+GO
+SET IDENTITY_INSERT [dbo].[MovieList] OFF
+GO
+SET IDENTITY_INSERT [dbo].[Product] ON 
+
+GO
+INSERT [dbo].[Product] ([ProductID], [ProductName], [ProductDescription], [CategoryID], [QuantityAvailable], [Price], [ImagePath], [ImagePath2], [VideoPath]) VALUES (3, N'SherLock Holmes', N'Movie', 5, 36, N'100', N'~/ImagesMovies/Sherlock_1_200x200.jpg', N'~/ImagesMovies/Sherlock_2_70x70.jpg', N'~/Movies/ManishaTayal_117055_Duet.mp4')
+GO
+INSERT [dbo].[Product] ([ProductID], [ProductName], [ProductDescription], [CategoryID], [QuantityAvailable], [Price], [ImagePath], [ImagePath2], [VideoPath]) VALUES (4, N'Jurassic World', N'Movie', 2, 7, N'200', N'~/ImagesMovies/jw_5_200x200.jpg', N'~/ImagesMovies/jw_3_70x70.jpg', N'~/Movies/ManishaTayal_117055_Duet.mp4')
+GO
+INSERT [dbo].[Product] ([ProductID], [ProductName], [ProductDescription], [CategoryID], [QuantityAvailable], [Price], [ImagePath], [ImagePath2], [VideoPath]) VALUES (5, N'Avengers', N'Movie', 4, 311, N'300', N'~/ImagesMovies/Avengers_1_200x200.jpg ', N'~/ImagesMovies/Avengers_70x70.jpg', N'~/Movies/ManishaTayal_117055_Duet.mp4')
+GO
+INSERT [dbo].[Product] ([ProductID], [ProductName], [ProductDescription], [CategoryID], [QuantityAvailable], [Price], [ImagePath], [ImagePath2], [VideoPath]) VALUES (6, N'Steve Jobs', N'Movie', 1, 310, N'300', N'~/ImagesMovies/jobs_1_200x200.jpg', N'~/ImagesMovies/jobs_2_70x70.jpg', N'~/Movies/ManishaTayal_117055_Duet.mp4')
+GO
+SET IDENTITY_INSERT [dbo].[Product] OFF
+GO
+ALTER TABLE [dbo].[Cart]  WITH CHECK ADD FOREIGN KEY([ProductID])
+REFERENCES [dbo].[Product] ([ProductID])
+GO
+ALTER TABLE [dbo].[Cart]  WITH CHECK ADD FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserID])
+GO
+ALTER TABLE [dbo].[FinalOrder]  WITH CHECK ADD FOREIGN KEY([OrderId])
+REFERENCES [dbo].[Orders] ([OrderID])
+GO
+ALTER TABLE [dbo].[FinalOrder]  WITH CHECK ADD FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserID])
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD FOREIGN KEY([UserId])
+REFERENCES [dbo].[Users] ([UserID])
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD FOREIGN KEY([CategoryID])
+REFERENCES [dbo].[Category] ([CategoryId])
+GO
+/****** Object:  StoredProcedure [dbo].[AddToCart]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[AddToCart]
+           @ProductName nvarchar (max)
+          ,@UserName nvarchar(50)	
+		  ,@Quantity int	 
+AS
+BEGIN
+
+INSERT INTO Cart (UserId,ProductID,Quantity,Price,PaidStatus)
+
+
+       SELECT
+       U_ID.UserId, P_ID.ProductId, @Quantity ,(P_ID.Price*@Quantity), 'No'
+FROM
+  (SELECT UserId FROM Users where Name=@UserName) As U_ID
+CROSS JOIN
+  (SELECT ProductID,Price FROM Product where ProductName=@ProductName)           AS P_ID
+
+Update Product
+Set QuantityAvailable =QuantityAvailable-@Quantity
+where ProductName=@ProductName
+
+Update Cart
+Set OrderID =0
+where UserId=(SELECT UserId FROM Users where Name=@UserName)
+
+SELECT TOP 1 * FROM [Cart] where UserId=(SELECT UserId FROM Users where Name=@UserName) ORDER BY CartID DESC
+END
+
+GO
+/****** Object:  StoredProcedure [dbo].[AddToCartDisplay]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[AddToCartDisplay]
+        
+          @UserName nvarchar(50)	
+		  
+AS
+BEGIN
+
+SELECT TOP 1 * FROM [Cart] where UserId=(SELECT UserId FROM Users where Name=@UserName) ORDER BY CartID DESC
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[AddToUsers]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create PROCEDURE [dbo].[AddToUsers]
+        
+           @Name nvarchar(50)
+         , @Address nvarchar(50)
+		 , @Email nvarchar(50)
+		 , @Password nvarchar(50)
+	 	 
+AS
+BEGIN
+	
+	INSERT INTO [Users] 
+		(
+		     [Name]
+			,[Address]
+			,[Email]
+			, [Password]	
+			
+		) 
+	VALUES 
+		(
+		    @Name 
+         , @Address
+		 , @Email
+		 , @Password 
+		 
+		)
+
+
+select * from Users
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[CheckOut]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[CheckOut]
+           @username nvarchar(50)
+ 
+	 	 
+AS
+BEGIN
+	
+insert into Orders (UserId,[SumQuantity], SumPrice) 
+select (Select  UserID from Users where Name=@username) as UserId, Sum(Quantity) as SumQuantity, Sum(Price) as Sumprice
+	from Cart 
+	where UserId= (Select  UserID from Users where Name=@username) 
+
+
+Update Cart
+Set PaidStatus='Yes'
+where UserId=(Select  UserID from Users where Name=@username)
+
+delete from Orders where SumQuantity IS Null
+select * from Orders where UserId= (Select  UserID from Users where Name=@username) and  ApprovedStatus IS NULL
+END
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[DisplayAllProducts]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[DisplayAllProducts]
+        
+	 	 
+AS
+BEGIN
+	--wrong naming
+	Select P.*,C.CategoryName
+    from Product P
+	inner join Category C
+	on P.CategoryID=C.CategoryID
+	where P.QuantityAvailable>0
+	--Select * from Product
+
+END
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[DisplayCart]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[DisplayCart]
+           @UserName nvarchar(50)
+         
+AS
+BEGIN
+Select C.* ,P.ProductName from Cart C
+join Product P
+on P.ProductID=C.ProductID
+where UserID=(SELECT UserId FROM Users where Name=@UserName) and PaidStatus='No'
+
+delete from Cart
+where UserID=(SELECT UserId FROM Users where Name=@UserName) and PaidStatus='Yes'
+
+END
+
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[DisplayCheckOut]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+Create PROCEDURE [dbo].[DisplayCheckOut]
+           @username nvarchar(50)
+ 
+	 	 
+AS
+BEGIN
+select * from Orders where UserId= (Select  UserID from Users where Name=@username) and  ApprovedStatus IS NULL
+END
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[DisplayProduct_ByCategory]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+CREATE PROCEDURE [dbo].[DisplayProduct_ByCategory]
+         @Category  nvarchar(50) 
+		
+AS
+BEGIN
+	
+	Select P.*,C.CategoryName
+    from Product P
+	inner join Category C
+	on P.CategoryID=C.CategoryID
+	where C.CategoryName= @Category
+
+END
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[FinalBuy]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[FinalBuy]
+           @orderID nvarchar(50)
+ 	 	 
+AS
+BEGIN
+	
+insert into FinalOrder(UserId, OrderId,SumQuantity,SumPrice ) 
+select UserId, OrderId, SumQuantity, Sumprice
+	from Orders 
+	where OrderID= @orderID
+
+
+Update Orders
+Set ApprovedStatus='Yes' where OrderID=@orderID
+
+Update FinalOrder
+Set ShippingDate= GETDATE()+3;
+
+Select * from FinalOrder where OrderId= @orderID;
+
+END
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[LoginCredentials]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+CREATE PROCEDURE [dbo].[LoginCredentials]
+           @UserName nvarchar(50)
+         , @Password nvarchar(50)
+		 
+AS
+BEGIN
+	
+ Select UserID from Users U
+ where U.Name=@UserName AND U.Password=@Password
+	END
+
+
+
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[OrderDisplay]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE PROCEDURE [dbo].[OrderDisplay]
+           @username nvarchar(50)
+   --      , @ProductID int
+		 --, @Quantity int
+		 --, @Price int
+		 --, @PaidStatus nvarchar(50)
+	 	 
+AS
+BEGIN
+
+select * from Orders where UserId= (Select  UserID from Users where Name=@username) and  ApprovedStatus IS NULL
+END
+
+
+
+GO
+/****** Object:  StoredProcedure [dbo].[SignUp]    Script Date: 6/19/2017 11:24:15 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+
+
+
+CREATE PROCEDURE [dbo].[SignUp]
+           @UserName nvarchar(50)
+         , @Password nvarchar(50)
+		 , @Email nvarchar(50)
+		 , @Address nvarchar(50)
+	 	 
+AS
+BEGIN
+	
+	INSERT INTO [Users] 
+		(
+		     [Name]
+			,[Password]
+			, [Email]
+			, [Address]	
+		) 
+	VALUES 
+		(
+		   @UserName 
+         , @Password
+		 , @Email 
+		 , @Address 
+		 
+		)
+
+
+END
+
+
+
+
+GO
+USE [master]
+GO
+ALTER DATABASE [NewCommerce] SET  READ_WRITE 
+GO
